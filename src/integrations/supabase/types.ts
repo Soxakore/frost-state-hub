@@ -14,16 +14,581 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alliance_moderators: {
+        Row: {
+          alliance_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          alliance_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          alliance_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alliance_moderators_alliance_id_fkey"
+            columns: ["alliance_id"]
+            isOneToOne: false
+            referencedRelation: "alliances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      alliances: {
+        Row: {
+          bear_trap_time: string | null
+          contact: string | null
+          crazy_joe_time: string | null
+          created_at: string
+          description: string | null
+          foundry_time: string | null
+          id: string
+          main_language: string | null
+          name: string
+          power: string | null
+          recruiting_status: string
+          requirements: string | null
+          tag: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          bear_trap_time?: string | null
+          contact?: string | null
+          crazy_joe_time?: string | null
+          created_at?: string
+          description?: string | null
+          foundry_time?: string | null
+          id?: string
+          main_language?: string | null
+          name: string
+          power?: string | null
+          recruiting_status?: string
+          requirements?: string | null
+          tag: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          bear_trap_time?: string | null
+          contact?: string | null
+          crazy_joe_time?: string | null
+          created_at?: string
+          description?: string | null
+          foundry_time?: string | null
+          id?: string
+          main_language?: string | null
+          name?: string
+          power?: string | null
+          recruiting_status?: string
+          requirements?: string | null
+          tag?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      announcements: {
+        Row: {
+          approved_by: string | null
+          category: Database["public"]["Enums"]["announcement_category"]
+          created_at: string
+          created_by: string | null
+          id: string
+          message: string
+          published_at: string | null
+          status: string
+          title: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Insert: {
+          approved_by?: string | null
+          category?: Database["public"]["Enums"]["announcement_category"]
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          message: string
+          published_at?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Update: {
+          approved_by?: string | null
+          category?: Database["public"]["Enums"]["announcement_category"]
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          message?: string
+          published_at?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Relationships: []
+      }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          new_value: Json | null
+          old_value: Json | null
+          record_id: string | null
+          role: string | null
+          table_name: string
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+          record_id?: string | null
+          role?: string | null
+          table_name: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+          record_id?: string | null
+          role?: string | null
+          table_name?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          instructions: string | null
+          local_note: string | null
+          name: string
+          status: string
+          updated_at: string
+          updated_by: string | null
+          utc_time: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          instructions?: string | null
+          local_note?: string | null
+          name: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+          utc_time?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          instructions?: string | null
+          local_note?: string | null
+          name?: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+          utc_time?: string
+        }
+        Relationships: []
+      }
+      governor_board: {
+        Row: {
+          buff_schedule: Json
+          castle_rotation: string | null
+          current_governor: string | null
+          id: string
+          minister_rotation: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          buff_schedule?: Json
+          castle_rotation?: string | null
+          current_governor?: string | null
+          id?: string
+          minister_rotation?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          buff_schedule?: Json
+          castle_rotation?: string | null
+          current_governor?: string | null
+          id?: string
+          minister_rotation?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      guides: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          category: string
+          content: string
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          disabled: boolean
+          display_name: string | null
+          email: string | null
+          id: string
+          in_game_name: string | null
+          last_login: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          disabled?: boolean
+          display_name?: string | null
+          email?: string | null
+          id: string
+          in_game_name?: string | null
+          last_login?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          disabled?: boolean
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          in_game_name?: string | null
+          last_login?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          alliance: string | null
+          created_at: string
+          description: string
+          id: string
+          issue_type: string | null
+          reported_player: string | null
+          reporter_name: string
+          screenshot_url: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          alliance?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          issue_type?: string | null
+          reported_player?: string | null
+          reporter_name: string
+          screenshot_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          alliance?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          issue_type?: string | null
+          reported_player?: string | null
+          reporter_name?: string
+          screenshot_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      rules_sections: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          category: string
+          content: string
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      svs_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+          visibility: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+          visibility?: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+          visibility?: Database["public"]["Enums"]["announcement_visibility"]
+        }
+        Relationships: []
+      }
+      transfer_applications: {
+        Row: {
+          created_at: string
+          current_alliance: string | null
+          current_state: string | null
+          events_available: string | null
+          furnace_level: string | null
+          id: string
+          in_game_name: string
+          message: string | null
+          power: string | null
+          preferred_alliance: string | null
+          private_notes: string | null
+          solo_or_group: string | null
+          status: string
+          time_zone: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          current_alliance?: string | null
+          current_state?: string | null
+          events_available?: string | null
+          furnace_level?: string | null
+          id?: string
+          in_game_name: string
+          message?: string | null
+          power?: string | null
+          preferred_alliance?: string | null
+          private_notes?: string | null
+          solo_or_group?: string | null
+          status?: string
+          time_zone?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          current_alliance?: string | null
+          current_state?: string | null
+          events_available?: string | null
+          furnace_level?: string | null
+          id?: string
+          in_game_name?: string
+          message?: string | null
+          power?: string | null
+          preferred_alliance?: string | null
+          private_notes?: string | null
+          solo_or_group?: string | null
+          status?: string
+          time_zone?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      transfer_settings: {
+        Row: {
+          contact_info: string | null
+          id: string
+          looking_for: string | null
+          power_cap: string | null
+          requirements: string | null
+          special_invites: string
+          status: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          contact_info?: string | null
+          id?: string
+          looking_for?: string | null
+          power_cap?: string | null
+          requirements?: string | null
+          special_invites?: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          contact_info?: string | null
+          id?: string
+          looking_for?: string | null
+          power_cap?: string | null
+          requirements?: string | null
+          special_invites?: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_edit_alliance: {
+        Args: { _alliance_id: string; _user_id: string }
+        Returns: boolean
+      }
+      ensure_user_profile: {
+        Args: { _display_name?: string; _email?: string }
+        Returns: undefined
+      }
+      has_any_role: {
+        Args: {
+          _roles: Database["public"]["Enums"]["app_role"][]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      announcement_category: "State" | "Event" | "Transfer" | "SvS" | "Alliance"
+      announcement_visibility: "Public" | "Private"
+      app_role:
+        | "owner"
+        | "governor"
+        | "r5_moderator"
+        | "r4_moderator"
+        | "event_manager"
+        | "recruiter"
+        | "viewer"
+      content_status:
+        | "Active"
+        | "Open"
+        | "Limited"
+        | "Closed"
+        | "Protected"
+        | "War Phase"
+        | "Pending"
+        | "Published"
+        | "Draft"
+        | "Weekly"
+        | "TBD"
+        | "Cancelled"
+        | "New"
+        | "Reviewing"
+        | "Accepted"
+        | "Rejected"
+        | "Need More Info"
+        | "Yes"
+        | "No"
+        | "Available"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +715,40 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      announcement_category: ["State", "Event", "Transfer", "SvS", "Alliance"],
+      announcement_visibility: ["Public", "Private"],
+      app_role: [
+        "owner",
+        "governor",
+        "r5_moderator",
+        "r4_moderator",
+        "event_manager",
+        "recruiter",
+        "viewer",
+      ],
+      content_status: [
+        "Active",
+        "Open",
+        "Limited",
+        "Closed",
+        "Protected",
+        "War Phase",
+        "Pending",
+        "Published",
+        "Draft",
+        "Weekly",
+        "TBD",
+        "Cancelled",
+        "New",
+        "Reviewing",
+        "Accepted",
+        "Rejected",
+        "Need More Info",
+        "Yes",
+        "No",
+        "Available",
+      ],
+    },
   },
 } as const
