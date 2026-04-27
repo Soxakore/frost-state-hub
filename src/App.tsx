@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { FrostShell } from "@/components/frost/FrostShell";
 import { AlliancesPage, EventsPage, GovernorPage, GuidesPage, HomePage, ReportPage, RulesPage, SvsPage, TransferPage } from "@/components/frost/PublicPages";
+import { TermsPage, PrivacyPage } from "@/components/frost/LegalPages";
 import { ForgotPasswordPage, LoginPage, ProfilePage, RegisterPage, ResetPasswordPage } from "@/components/frost/AuthPages";
 import { AllianceManager, AnnouncementsManager, AuditLogPage, DashboardHome, DashboardLayout, EventsManager, GovernorManager, GuidesManager, RulesManager, SvsNotesManager, TransferManager, TransferSettingsManager, UsersManager } from "@/components/frost/Dashboard";
 import NotFound from "./pages/NotFound.tsx";
@@ -30,6 +31,8 @@ const App = () => (
               <Route path="/governor" element={<GovernorPage />} />
               <Route path="/guides" element={<GuidesPage />} />
               <Route path="/report" element={<ReportPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />

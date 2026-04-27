@@ -4,73 +4,332 @@
 
 @layer base {
   :root {
-    --background: 221 53% 5%;
-    --foreground: 196 45% 94%;
-    --card: 218 45% 9%;
-    --card-foreground: 196 45% 94%;
-    --popover: 218 42% 8%;
-    --popover-foreground: 196 45% 94%;
-    --primary: 193 95% 62%;
-    --primary-foreground: 221 53% 5%;
-    --secondary: 216 36% 15%;
-    --secondary-foreground: 198 50% 90%;
-    --muted: 216 31% 17%;
-    --muted-foreground: 203 24% 68%;
-    --accent: 42 93% 62%;
-    --accent-foreground: 222 54% 7%;
-    --destructive: 356 78% 58%;
-    --destructive-foreground: 196 45% 94%;
-    --border: 199 65% 74% / 0.18;
-    --input: 199 65% 74% / 0.20;
-    --ring: 193 95% 62%;
+    --background: 240 25% 10%;
+    --foreground: 210 40% 96%;
+    --card: 240 22% 14%;
+    --card-foreground: 210 35% 94%;
+    --popover: 240 22% 12%;
+    --popover-foreground: 210 35% 94%;
+    --primary: 190 100% 70%;
+    --primary-foreground: 240 30% 8%;
+    --secondary: 240 20% 18%;
+    --secondary-foreground: 210 40% 90%;
+    --muted: 240 16% 22%;
+    --muted-foreground: 215 20% 68%;
+    --accent: 31 100% 62%;
+    --accent-foreground: 240 30% 8%;
+    --destructive: 5 86% 63%;
+    --destructive-foreground: 210 35% 94%;
+    --border: 240 30% 28% / 0.55;
+    --input: 240 30% 28% / 0.55;
+    --ring: 190 90% 58%;
     --success: 166 77% 48%;
-    --warning: 42 93% 62%;
+    --warning: 31 100% 62%;
     --info: 211 94% 67%;
-    --frost: 190 100% 86%;
-    --glass: 213 54% 12% / 0.72;
-    --glass-strong: 214 54% 16% / 0.88;
-    --silver: 210 25% 78%;
-    --radius: 0.45rem;
-    --gradient-command: radial-gradient(circle at 20% 15%, hsl(193 95% 62% / 0.22), transparent 28%), radial-gradient(circle at 80% 0%, hsl(42 93% 62% / 0.12), transparent 24%), linear-gradient(135deg, hsl(221 53% 5%), hsl(216 51% 8%) 48%, hsl(220 60% 4%));
-    --gradient-panel: linear-gradient(145deg, hsl(var(--glass-strong)), hsl(216 54% 9% / 0.72));
-    --gradient-ice: linear-gradient(135deg, hsl(193 95% 62%), hsl(190 100% 86%));
-    --shadow-command: 0 24px 80px hsl(193 95% 35% / 0.18), inset 0 1px 0 hsl(190 100% 86% / 0.18);
-    --shadow-gold: 0 18px 44px hsl(42 93% 48% / 0.20);
-    --sidebar-background: 218 45% 9%;
-    --sidebar-foreground: 196 45% 94%;
-    --sidebar-primary: 193 95% 62%;
-    --sidebar-primary-foreground: 221 53% 5%;
-    --sidebar-accent: 216 36% 15%;
-    --sidebar-accent-foreground: 198 50% 90%;
-    --sidebar-border: 199 65% 74% / 0.18;
-    --sidebar-ring: 193 95% 62%;
+    --frost: 190 100% 88%;
+    --glass: 240 28% 14% / 0.78;
+    --glass-strong: 240 32% 16% / 0.92;
+    --silver: 215 28% 80%;
+    --radius: 0.5rem;
+    --wiki-dark: 240 25% 10%;
+    --wiki-panel: 240 22% 16%;
+    --wiki-accent: 190 100% 70%;
+    --shadow-command: 0 8px 32px hsl(240 40% 4% / 0.45);
+    --shadow-gold: 0 8px 28px hsl(31 100% 50% / 0.25);
+    --sidebar-background: 240 22% 12%;
+    --sidebar-foreground: 210 35% 94%;
+    --sidebar-primary: 190 90% 58%;
+    --sidebar-primary-foreground: 240 30% 6%;
+    --sidebar-accent: 240 24% 20%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 240 30% 30% / 0.4;
+    --sidebar-ring: 190 90% 58%;
   }
   .dark { color-scheme: dark; }
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: Rajdhani, ui-sans-serif, system-ui, sans-serif;
-    background: var(--gradient-command);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background-color: hsl(240 25% 10%);
+    background-image: url('/wiki/bg-main.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     min-height: 100vh;
   }
-  h1, h2, h3, .font-command { font-family: Orbitron, Rajdhani, ui-sans-serif, system-ui, sans-serif; letter-spacing: 0; }
+  h1, h2, h3, .font-wiki { font-family: 'Rowdies', 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+  /* Keep backward compat alias */
+  .font-command { font-family: 'Rowdies', 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
 }
 
 @layer components {
-  .frost-shell { @apply min-h-screen overflow-x-hidden bg-background text-foreground; background: var(--gradient-command); }
-  .frost-grid { background-image: linear-gradient(hsl(var(--frost) / .055) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--frost) / .055) 1px, transparent 1px); background-size: 52px 52px; }
-  .frost-card { @apply border border-border bg-card/80 shadow-command backdrop-blur-xl; background: var(--gradient-panel); }
-  .frost-card-hover { @apply transition duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-gold; }
-  .frost-button { @apply rounded-md bg-primary px-4 py-2 font-bold text-primary-foreground shadow-command transition hover:-translate-y-0.5 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring; }
-  .gold-button { @apply rounded-md bg-accent px-4 py-2 font-bold text-accent-foreground shadow-gold transition hover:-translate-y-0.5 hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-ring; }
-  .ghost-button { @apply rounded-md border border-border bg-secondary/55 px-4 py-2 font-bold text-secondary-foreground backdrop-blur transition hover:border-primary/50 hover:bg-secondary; }
+  /* ─── Shell ─── */
+  .frost-shell {
+    @apply min-h-screen overflow-x-hidden;
+    background: transparent;
+  }
+
+  /* ─── Navbar ─── */
+  .wiki-navbar {
+    @apply sticky top-0 z-50;
+    background: hsl(240 28% 12% / 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid hsl(240 30% 30% / 0.35);
+    box-shadow: 0 2px 20px hsl(240 40% 4% / 0.4);
+  }
+  .wiki-nav-link {
+    @apply relative px-4 py-2.5 text-sm font-semibold transition-all duration-200;
+    color: hsl(210 30% 78%);
+  }
+  .wiki-nav-link:hover {
+    color: hsl(190 100% 70%);
+  }
+  .wiki-nav-link.active {
+    color: hsl(190 100% 70%);
+  }
+  .wiki-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: hsl(190 100% 70%);
+    border-radius: 1px;
+  }
+
+  /* ─── Section Title (wiki style with sparkle icon) ─── */
+  .wiki-section-title {
+    @apply flex items-center gap-3 font-bold;
+    font-family: 'Rowdies', sans-serif;
+    font-size: 1.5rem;
+    color: hsl(210 40% 96%);
+  }
+  .wiki-section-title::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('/wiki/title-icon.png') no-repeat center / contain;
+    flex-shrink: 0;
+  }
+
+  /* ─── Icon Grid Buttons ─── */
+  .wiki-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 640px) {
+    .wiki-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .wiki-grid-button {
+    @apply relative flex flex-col items-center justify-center rounded-xl p-4 transition-all duration-300;
+    background: url('/wiki/big-button-bg.png') no-repeat center / cover;
+    min-height: 110px;
+    border: 1px solid hsl(240 30% 30% / 0.4);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .wiki-grid-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: hsl(190 100% 70% / 0.5);
+    box-shadow: 0 8px 28px hsl(190 100% 50% / 0.15), 0 0 0 1px hsl(190 100% 70% / 0.12);
+  }
+  .wiki-grid-button img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 6px hsl(0 0% 0% / 0.4));
+    transition: transform 0.3s ease;
+  }
+  .wiki-grid-button:hover img {
+    transform: scale(1.12);
+  }
+  .wiki-grid-button span {
+    @apply text-sm font-semibold;
+    color: hsl(210 35% 90%);
+    text-shadow: 0 1px 4px hsl(0 0% 0% / 0.5);
+  }
+
+  /* ─── Wiki Card / Panel ─── */
+  .frost-card {
+    @apply border backdrop-blur-md;
+    background: hsl(240 22% 14% / 0.85);
+    border-color: hsl(240 30% 30% / 0.45);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 24px hsl(240 40% 4% / 0.35);
+  }
+  .frost-card-hover {
+    @apply transition duration-300;
+  }
+  .frost-card-hover:hover {
+    transform: translateY(-2px);
+    border-color: hsl(190 100% 70% / 0.35);
+    box-shadow: 0 8px 32px hsl(240 40% 4% / 0.5);
+  }
+
+  /* ─── Wiki Panel (sidebar style) ─── */
+  .wiki-panel {
+    @apply rounded-xl p-5;
+    background: hsl(240 22% 14% / 0.88);
+    border: 1px solid hsl(240 30% 30% / 0.45);
+    box-shadow: 0 4px 24px hsl(240 40% 4% / 0.35);
+    backdrop-filter: blur(12px);
+  }
+
+  /* ─── Banner / Hero ─── */
+  .wiki-banner {
+    @apply relative overflow-hidden rounded-xl;
+    border: 1px solid hsl(240 30% 30% / 0.4);
+    box-shadow: 0 4px 24px hsl(240 40% 4% / 0.4);
+  }
+  .wiki-banner img {
+    @apply w-full h-auto;
+    display: block;
+  }
+
+  /* ─── Buttons ─── */
+  .frost-button {
+    @apply rounded-lg bg-primary px-5 py-2.5 font-semibold text-primary-foreground transition-all duration-200;
+    box-shadow: 0 4px 16px hsl(190 100% 40% / 0.25);
+  }
+  .frost-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px hsl(190 100% 40% / 0.35);
+    filter: brightness(1.05);
+  }
+  .gold-button {
+    @apply rounded-lg bg-accent px-5 py-2.5 font-semibold text-accent-foreground transition-all duration-200;
+    box-shadow: var(--shadow-gold);
+  }
+  .gold-button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+  }
+  .ghost-button {
+    @apply rounded-lg border px-5 py-2.5 font-semibold transition-all duration-200;
+    background: hsl(240 22% 16% / 0.6);
+    border-color: hsl(240 30% 30% / 0.5);
+    color: hsl(210 35% 90%);
+    backdrop-filter: blur(6px);
+  }
+  .ghost-button:hover {
+    border-color: hsl(190 100% 70% / 0.4);
+    background: hsl(240 22% 18% / 0.8);
+  }
+
+  /* ─── Status Badges ─── */
   .status-success { @apply border-success/40 bg-success/15 text-success; }
   .status-warning { @apply border-warning/40 bg-warning/15 text-warning; }
   .status-danger { @apply border-destructive/40 bg-destructive/15 text-destructive; }
   .status-info { @apply border-info/40 bg-info/15 text-info; }
-  .field { @apply rounded-md border border-input bg-secondary/45 px-3 py-2 text-foreground placeholder:text-muted-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/40; }
-  .snow-layer { pointer-events: none; background-image: radial-gradient(circle, hsl(var(--frost) / .75) 1px, transparent 1.6px), radial-gradient(circle, hsl(var(--primary) / .35) 1px, transparent 1.4px); background-size: 120px 120px, 180px 180px; animation: snowdrift 24s linear infinite; }
+
+  /* ─── Form Fields ─── */
+  .field {
+    @apply rounded-lg border px-3 py-2 text-foreground placeholder:text-muted-foreground outline-none transition;
+    background: hsl(240 22% 14% / 0.65);
+    border-color: hsl(240 30% 30% / 0.5);
+  }
+  .field:focus {
+    border-color: hsl(190 100% 70%);
+    box-shadow: 0 0 0 3px hsl(190 100% 70% / 0.15);
+  }
+
+  /* ─── Ice Panel (legacy compat) ─── */
+  .ice-panel {
+    @apply relative overflow-hidden backdrop-blur-md;
+    background: hsl(240 22% 14% / 0.85);
+    border: 1px solid hsl(240 30% 30% / 0.45);
+    box-shadow: 0 4px 24px hsl(240 40% 4% / 0.35);
+  }
+  .ice-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, hsl(190 100% 88% / 0.06), transparent 34%);
+    opacity: 0.6;
+  }
+
+  /* ─── Chips ─── */
+  .frost-chip {
+    @apply inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-semibold backdrop-blur;
+    background: hsl(240 22% 16% / 0.6);
+    border-color: hsl(240 30% 30% / 0.45);
+    color: hsl(210 35% 90%);
+  }
+
+  /* ─── Hero (legacy compat) ─── */
+  .whiteout-hero {
+    background-image:
+      linear-gradient(90deg, hsl(240 25% 10% / .96) 0%, hsl(240 25% 10% / .5) 38%, hsl(240 25% 10% / .24) 64%, hsl(240 25% 10% / .88) 100%),
+      linear-gradient(0deg, hsl(240 25% 10%) 0%, transparent 30%, transparent 72%, hsl(240 25% 10% / .78) 100%),
+      url('/frost/promo-command.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* ─── Promo images (legacy compat) ─── */
+  .promo-image {
+    @apply relative overflow-hidden rounded-xl border bg-cover bg-center;
+    border-color: hsl(240 30% 30% / 0.45);
+    box-shadow: 0 4px 24px hsl(240 40% 4% / 0.35);
+  }
+  .promo-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 22%, hsl(240 25% 10% / .86) 100%);
+    pointer-events: none;
+  }
+
+  /* ─── Command marker (legacy compat) ─── */
+  .command-marker {
+    @apply rounded-lg border px-3 py-2 text-sm font-semibold backdrop-blur-md;
+    background: hsl(190 100% 70% / 0.12);
+    border-color: hsl(190 100% 70% / 0.35);
+    color: hsl(190 100% 70%);
+    box-shadow: 0 4px 16px hsl(190 100% 50% / 0.12);
+  }
+
+  /* ─── Snow (subtle version) ─── */
+  .snow-layer {
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle, hsl(190 100% 95% / .3) 1px, transparent 1.6px),
+      radial-gradient(circle, hsl(190 100% 80% / .15) 1px, transparent 1.4px);
+    background-size: 160px 160px, 220px 220px;
+    animation: snowdrift 32s linear infinite;
+  }
+
+  /* ─── Contributor / Avatar ─── */
+  .wiki-contributor {
+    @apply flex items-center gap-3 rounded-lg p-2 transition;
+  }
+  .wiki-contributor:hover {
+    background: hsl(240 22% 18% / 0.6);
+  }
+
+  /* ─── Footer ─── */
+  .wiki-footer {
+    @apply py-8 text-center text-sm;
+    background: hsl(240 28% 8% / 0.95);
+    border-top: 1px solid hsl(240 30% 28% / 0.4);
+    color: hsl(215 20% 60%);
+    backdrop-filter: blur(8px);
+  }
+  .wiki-footer a {
+    color: hsl(210 30% 72%);
+    transition: color 0.2s;
+  }
+  .wiki-footer a:hover {
+    color: hsl(190 100% 70%);
+  }
 }
 
 @layer utilities {
@@ -79,8 +338,12 @@
   .shadow-gold { box-shadow: var(--shadow-gold); }
 }
 
-@keyframes snowdrift { from { background-position: 0 0, 0 0; } to { background-position: 120px 280px, -180px 360px; } }
-@keyframes scanline { 0%, 100% { transform: translateX(-10%); opacity: .24; } 50% { transform: translateX(10%); opacity: .58; } }
+@keyframes snowdrift { from { background-position: 0 0, 0 0; } to { background-position: 160px 380px, -220px 440px; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out both;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
