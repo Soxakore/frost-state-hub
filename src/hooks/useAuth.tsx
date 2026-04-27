@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     const { data } = await supabase.from("user_roles" as any).select("role").eq("user_id", userId);
-    const nextRoles = ((data || []) as { role: AppRole }[]).map((row) => row.role);
+    const nextRoles = ((data || []) as unknown as { role: AppRole }[]).map((row) => row.role);
     setRoles(nextRoles.length ? nextRoles : ["viewer"]);
   };
 
