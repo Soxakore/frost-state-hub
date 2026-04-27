@@ -315,6 +315,594 @@
     background: hsl(240 22% 18% / 0.6);
   }
 
+  /* ─── Alliance Directory (game-style ranking) ─── */
+  .generated-alliance-banner {
+    @apply relative mb-8 overflow-hidden rounded-2xl;
+    border: 4px solid hsl(202 100% 82% / .44);
+    background: hsl(210 80% 12%);
+    box-shadow:
+      inset 0 0 0 2px hsl(0 0% 100% / .10),
+      inset 0 0 42px hsl(190 100% 78% / .18),
+      0 26px 90px hsl(205 95% 18% / .55);
+  }
+  .generated-alliance-banner img {
+    @apply block h-auto w-full;
+    filter: saturate(1.05) contrast(1.02);
+  }
+  .generated-alliance-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 40%, hsl(43 100% 66% / .18), transparent 24%),
+      linear-gradient(180deg, hsl(0 0% 100% / .08), transparent 24%, transparent 80%, hsl(210 100% 5% / .22));
+    mix-blend-mode: screen;
+  }
+  .generated-alliance-banner::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    pointer-events: none;
+    border-radius: 1rem;
+    border: 1px solid hsl(190 100% 90% / .28);
+    box-shadow: inset 0 0 30px hsl(190 100% 80% / .12);
+  }
+  .banner-blaze {
+    position: absolute;
+    bottom: -8%;
+    z-index: 2;
+    width: 16%;
+    min-width: 92px;
+    fill: url("#unused");
+    color: hsl(40 100% 66%);
+    opacity: .0;
+    pointer-events: none;
+    filter: blur(10px) drop-shadow(0 0 32px hsl(38 100% 58% / .62));
+    animation: generatedBlaze 2.6s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+  .banner-blaze path {
+    fill: hsl(41 100% 62% / .62);
+  }
+  .banner-blaze-left { left: 16%; animation-delay: -.7s; }
+  .banner-blaze-center { left: 42%; width: 20%; animation-delay: -1.3s; }
+  .banner-blaze-right { right: 16%; animation-delay: -1.8s; }
+  .generated-banner-shine {
+    position: absolute;
+    inset: -40% -35%;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 42%, hsl(0 0% 100% / .18) 50%, transparent 58%);
+    transform: translateX(-30%);
+    animation: generatedBannerShine 5s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+  .generated-rank-overlays {
+    @apply absolute inset-0 z-30;
+    pointer-events: none;
+  }
+  .generated-floating-banners {
+    @apply absolute inset-0 z-20;
+    pointer-events: none;
+  }
+  .float-banner-image {
+    @apply absolute;
+    transform-origin: center bottom;
+    filter: drop-shadow(0 10px 16px hsl(210 100% 5% / .55));
+    animation: bannerFloat 3.6s ease-in-out infinite;
+    height: auto;
+    max-width: 200px;
+  }
+  .generated-floating-banners::before,
+  .generated-floating-banners::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 999px;
+    filter: blur(18px);
+    animation: auraPulse 2.8s ease-in-out infinite;
+  }
+  .generated-floating-banners::before {
+    left: 14%;
+    top: 24%;
+    width: 20%;
+    height: 35%;
+    background: radial-gradient(ellipse, hsl(194 100% 72% / .60), transparent 64%);
+  }
+  .generated-floating-banners::after {
+    right: 14%;
+    top: 25%;
+    width: 20%;
+    height: 35%;
+    background: radial-gradient(ellipse, hsl(24 100% 70% / .58), transparent 64%);
+    animation-delay: -1.3s;
+  }
+  .float-banner-left {
+    left: 16%;
+    top: 20%;
+    max-width: 180px;
+    animation-delay: -.4s;
+  }
+  .float-banner-center {
+    left: 44%;
+    transform: translateX(-50%);
+    top: 16%;
+    max-width: 210px;
+    animation-delay: -1.1s;
+    filter: drop-shadow(0 10px 16px hsl(210 100% 5% / .55)) drop-shadow(0 0 22px hsl(42 100% 62% / .42));
+  }
+  .float-banner-right {
+    right: 16%;
+    top: 20%;
+    max-width: 180px;
+    animation-delay: -1.7s;
+  }
+  .float-banner-center + .float-banner-right { }
+  .generated-rank-name {
+    @apply absolute flex items-center justify-center gap-2 rounded-xl border px-3 py-2 text-center;
+    min-width: 17%;
+    max-width: 28%;
+    min-height: 7.2%;
+    border-color: hsl(0 0% 100% / .24);
+    background: hsl(212 65% 8% / .18);
+    box-shadow: 0 0 22px hsl(190 100% 72% / .18), inset 0 1px 0 hsl(0 0% 100% / .24);
+    backdrop-filter: blur(1.5px);
+    animation: rankNamePulse 3.2s ease-in-out infinite;
+  }
+  .generated-rank-name span {
+    @apply shrink-0 rounded-full px-2 py-1 font-command text-xs font-black text-white;
+    background: linear-gradient(180deg, hsl(211 80% 44%), hsl(214 90% 24%));
+    border: 1px solid hsl(190 100% 88% / .42);
+    text-shadow: 0 2px 0 hsl(210 80% 8% / .45);
+  }
+  .generated-rank-name b {
+    @apply truncate font-command text-sm font-black md:text-xl;
+    color: hsl(0 0% 100%);
+    text-shadow: 0 3px 0 hsl(210 90% 5% / .54), 0 0 12px hsl(190 100% 78% / .52);
+  }
+  .rank-overlay-left {
+    left: 11.2%;
+    top: 72.2%;
+    width: 22.4%;
+  }
+  .rank-overlay-center {
+    left: 37.3%;
+    top: 72.2%;
+    width: 27.5%;
+    min-height: 8.5%;
+    background: hsl(40 100% 52% / .18);
+    box-shadow: 0 0 32px hsl(41 100% 58% / .38), inset 0 1px 0 hsl(0 0% 100% / .26);
+    animation-delay: -.9s;
+  }
+  .rank-overlay-right {
+    left: 69%;
+    top: 72.2%;
+    width: 22.4%;
+    background: hsl(24 80% 52% / .16);
+    box-shadow: 0 0 24px hsl(24 100% 64% / .25), inset 0 1px 0 hsl(0 0% 100% / .24);
+    animation-delay: -1.6s;
+  }
+
+  .game-podium {
+    @apply relative mb-8 overflow-hidden rounded-2xl;
+    min-height: 540px;
+    isolation: isolate;
+    border: 4px solid hsl(202 100% 83% / 0.40);
+    background:
+      radial-gradient(circle at 50% 42%, hsl(41 100% 66% / .54), transparent 17%),
+      radial-gradient(circle at 17% 50%, hsl(190 100% 72% / .42), transparent 24%),
+      radial-gradient(circle at 83% 50%, hsl(23 100% 67% / .35), transparent 24%),
+      linear-gradient(180deg, hsl(209 88% 11%) 0%, hsl(205 86% 22%) 38%, hsl(205 100% 13%) 100%);
+    box-shadow:
+      inset 0 0 0 2px hsl(0 0% 100% / .09),
+      inset 0 -34px 70px hsl(205 100% 5% / .60),
+      0 30px 100px hsl(205 95% 18% / .58);
+  }
+  .game-podium::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, hsl(197 100% 72% / .24), transparent 22%, transparent 78%, hsl(24 100% 72% / .22)),
+      radial-gradient(ellipse at 50% 0%, hsl(202 100% 88% / .22), transparent 54%),
+      linear-gradient(180deg, hsl(0 0% 100% / .08), transparent 17%, transparent 84%, hsl(205 100% 4% / .58));
+  }
+  .game-podium::after {
+    content: "";
+    position: absolute;
+    inset: 13px;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 1rem;
+    border: 1px solid hsl(190 100% 88% / .24);
+    box-shadow: inset 0 0 30px hsl(190 100% 80% / .12);
+  }
+  .podium-blizzard {
+    @apply absolute inset-0;
+    z-index: 3;
+    background:
+      radial-gradient(circle, hsl(190 100% 95% / .8) 1px, transparent 1.7px),
+      radial-gradient(circle, hsl(34 100% 72% / .55) 1px, transparent 1.8px);
+    background-size: 84px 84px, 132px 132px;
+    animation: podiumSnow 16s linear infinite;
+    opacity: .38;
+  }
+  .podium-aurora {
+    position: absolute;
+    inset: -30% -12% auto;
+    z-index: 0;
+    height: 70%;
+    background:
+      radial-gradient(ellipse at 30% 55%, hsl(186 100% 72% / .30), transparent 42%),
+      radial-gradient(ellipse at 70% 45%, hsl(270 92% 72% / .18), transparent 40%);
+    filter: blur(26px);
+    animation: podiumAurora 7s ease-in-out infinite;
+  }
+  .podium-ice-rim {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, hsl(190 100% 78% / .35), transparent 13%, transparent 87%, hsl(190 100% 78% / .35)),
+      linear-gradient(180deg, hsl(190 100% 88% / .18), transparent 12%);
+    opacity: .8;
+  }
+  .podium-header {
+    @apply absolute left-7 top-7 z-20 md:left-11;
+  }
+  .podium-header p {
+    @apply font-command text-3xl font-black text-white md:text-4xl;
+    text-shadow: 0 4px 0 hsl(210 70% 12% / .72), 0 0 18px hsl(190 100% 82% / .45);
+  }
+  .podium-header span {
+    @apply mt-2 inline-flex rounded-full border px-3 py-1 text-xs font-black uppercase tracking-wider;
+    color: hsl(193 100% 84%);
+    border-color: hsl(190 100% 78% / .35);
+    background: hsl(208 70% 12% / .68);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / .14);
+  }
+  .podium-columns {
+    @apply absolute inset-x-0 bottom-0 top-24 z-0 grid grid-cols-3;
+  }
+  .podium-column {
+    @apply relative;
+    box-shadow: inset 1px 0 0 hsl(0 0% 100% / .12), inset -1px 0 0 hsl(0 0% 100% / .08);
+  }
+  .podium-column::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent, hsl(0 0% 100% / .10), transparent);
+  }
+  .podium-column-blue { background: linear-gradient(180deg, hsl(196 96% 61% / .12), hsl(188 100% 68% / .30)); }
+  .podium-column-gold { background: linear-gradient(180deg, hsl(41 100% 62% / .20), hsl(43 100% 58% / .50)); }
+  .podium-column-bronze { background: linear-gradient(180deg, hsl(20 100% 64% / .12), hsl(20 100% 70% / .28)); }
+  .podium-flame {
+    position: absolute;
+    z-index: 1;
+    bottom: -18%;
+    width: 26%;
+    height: 76%;
+    border-radius: 999px 999px 0 0;
+    background:
+      radial-gradient(ellipse at 50% 72%, hsl(37 100% 76% / .60), transparent 42%),
+      radial-gradient(ellipse at 45% 44%, hsl(45 100% 62% / .30), transparent 55%),
+      linear-gradient(180deg, transparent, hsl(33 100% 55% / .34), transparent);
+    filter: blur(13px);
+    mix-blend-mode: screen;
+    animation: podiumBlaze 2.8s ease-in-out infinite;
+  }
+  .podium-flame-1 { left: 9%; animation-delay: -.8s; opacity: .42; }
+  .podium-flame-2 { left: 37%; width: 30%; opacity: .70; }
+  .podium-flame-3 { right: 8%; animation-delay: -1.4s; opacity: .38; }
+  .podium-spotlight {
+    position: absolute;
+    z-index: 5;
+    top: 11%;
+    bottom: 0;
+    width: 22%;
+    transform-origin: bottom;
+    background: linear-gradient(180deg, hsl(0 0% 100% / .18), hsl(0 0% 100% / .03) 46%, transparent);
+    filter: blur(1px);
+    clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+    mix-blend-mode: screen;
+    animation: podiumSpotlight 4.6s ease-in-out infinite;
+  }
+  .podium-spotlight-left { left: 6%; transform: skewX(-8deg); opacity: .52; }
+  .podium-spotlight-center { left: 38%; width: 24%; opacity: .68; animation-delay: -1.2s; }
+  .podium-spotlight-right { right: 7%; transform: skewX(8deg); opacity: .45; animation-delay: -2.1s; }
+  .podium-stage {
+    @apply relative z-10 grid min-h-[540px] grid-cols-3 items-end gap-0 px-4 pb-0 pt-28 md:px-8;
+  }
+  .game-podium-slot {
+    @apply relative flex min-w-0 flex-col items-center justify-end;
+  }
+  .game-podium-slot::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    width: 90%;
+    height: 42px;
+    border-radius: 999px 999px 0 0;
+    background: radial-gradient(ellipse, hsl(190 100% 75% / .18), transparent 70%);
+    filter: blur(6px);
+  }
+  .podium-center { min-height: 440px; z-index: 8; }
+  .podium-left, .podium-right { min-height: 370px; z-index: 7; }
+  .podium-champion-burst {
+    position: absolute;
+    top: 6%;
+    z-index: -1;
+    width: clamp(180px, 30vw, 340px);
+    height: clamp(180px, 30vw, 340px);
+    border-radius: 999px;
+    background:
+      repeating-conic-gradient(from 8deg, hsl(47 100% 72% / .24) 0deg 8deg, transparent 8deg 18deg),
+      radial-gradient(circle, hsl(44 100% 68% / .36), transparent 62%);
+    filter: blur(.2px);
+    animation: championSpin 18s linear infinite;
+  }
+  .game-rank-banner {
+    @apply relative mb-0 flex flex-col items-center;
+    filter: drop-shadow(0 10px 10px hsl(210 80% 8% / .50));
+    transform: translateZ(0);
+  }
+  .banner-cloth {
+    @apply relative grid place-items-center;
+    width: clamp(86px, 17vw, 170px);
+    height: clamp(142px, 23vw, 238px);
+    clip-path: polygon(0 0, 100% 0, 100% 76%, 72% 76%, 50% 91%, 28% 76%, 0 76%);
+    border-radius: 12px 12px 0 0;
+    border: 2px solid hsl(0 0% 100% / .18);
+    box-shadow:
+      inset 0 0 0 4px hsl(0 0% 100% / .16),
+      inset 0 -24px 34px hsl(210 80% 10% / .24),
+      inset 16px 0 18px hsl(0 0% 100% / .08),
+      inset -16px 0 18px hsl(210 90% 8% / .14),
+      0 10px 18px hsl(210 80% 8% / .42);
+  }
+  .banner-cloth::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, hsl(0 0% 100% / .20), transparent 28%, hsl(0 0% 100% / .24) 52%, transparent 70%);
+    mix-blend-mode: screen;
+  }
+  .banner-cloth::after {
+    content: "";
+    position: absolute;
+    inset: -30% -120%;
+    z-index: 2;
+    background: linear-gradient(105deg, transparent 42%, hsl(0 0% 100% / .42) 50%, transparent 58%);
+    transform: translateX(-30%);
+    animation: bannerShine 4.4s ease-in-out infinite;
+  }
+  .banner-cloth svg {
+    @apply relative z-10;
+    width: 48%;
+    height: 48%;
+    color: white;
+    fill: currentColor;
+    filter: drop-shadow(0 3px 0 hsl(210 60% 8% / .18));
+  }
+  .game-rank-1 .banner-cloth {
+    background: linear-gradient(180deg, hsl(11 100% 66%), hsl(4 80% 45%));
+    width: clamp(112px, 21vw, 210px);
+    height: clamp(172px, 28vw, 292px);
+    box-shadow:
+      inset 0 0 0 4px hsl(0 0% 100% / .18),
+      inset 0 -28px 38px hsl(0 76% 16% / .22),
+      0 0 34px hsl(39 100% 62% / .34),
+      0 16px 22px hsl(210 80% 8% / .46);
+  }
+  .game-rank-2 .banner-cloth { background: linear-gradient(180deg, hsl(301 86% 66%), hsl(277 74% 45%)); }
+  .game-rank-3 .banner-cloth { background: linear-gradient(180deg, hsl(292 82% 66%), hsl(274 70% 46%)); }
+  .banner-handshake {
+    @apply absolute -right-3 -top-3 z-20 grid place-items-center rounded-lg;
+    width: clamp(42px, 6vw, 64px);
+    height: clamp(30px, 4vw, 46px);
+    background: linear-gradient(180deg, hsl(34 100% 64%), hsl(29 100% 47%));
+    color: white;
+    border: 2px solid hsl(44 100% 84% / .45);
+    box-shadow: 0 5px 12px hsl(24 100% 35% / .45);
+    transform: rotate(2deg);
+  }
+  .banner-handshake svg { width: 74%; height: 74%; fill: currentColor; }
+  .game-medal {
+    @apply relative z-30 -mt-8 grid place-items-center;
+    width: clamp(62px, 8.8vw, 96px);
+    height: clamp(74px, 10.8vw, 116px);
+  }
+  .game-medal svg {
+    @apply absolute inset-0 h-full w-full;
+    filter: drop-shadow(0 6px 7px hsl(210 80% 8% / .42));
+  }
+  .game-medal span {
+    @apply relative z-10 font-command text-4xl font-black text-white;
+    text-shadow: 0 3px 0 hsl(210 80% 10% / .45);
+  }
+  .game-medal-1 .medal-body { fill: hsl(43 96% 56%); stroke: hsl(47 100% 78%); stroke-width: 4; }
+  .game-medal-1 .medal-ribbon { fill: hsl(355 80% 47%); }
+  .game-medal-2 .medal-body { fill: hsl(215 24% 72%); stroke: hsl(207 100% 90%); stroke-width: 4; }
+  .game-medal-2 .medal-ribbon { fill: hsl(211 85% 62%); }
+  .game-medal-3 .medal-body { fill: hsl(15 45% 63%); stroke: hsl(24 75% 84%); stroke-width: 4; }
+  .game-medal-3 .medal-ribbon { fill: hsl(8 45% 48%); }
+  .medal-glint { fill: hsl(0 0% 100% / .26); }
+  .podium-name-card {
+    @apply relative grid w-full place-items-center px-2 text-center;
+    min-height: clamp(96px, 13vw, 148px);
+    border-radius: 28px 28px 0 0;
+    border: 2px solid hsl(0 0% 100% / .18);
+    box-shadow:
+      inset 0 9px 18px hsl(0 0% 100% / .32),
+      inset 0 -12px 18px hsl(210 60% 10% / .10),
+      0 -8px 18px hsl(0 0% 100% / .10),
+      0 16px 26px hsl(210 90% 6% / .35);
+  }
+  .podium-name-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, hsl(0 0% 100% / .22), transparent 38%, hsl(0 0% 100% / .08));
+    pointer-events: none;
+  }
+  .podium-name-card p {
+    @apply relative z-10 truncate font-command text-xl font-black md:text-2xl;
+    max-width: 100%;
+    color: hsl(215 31% 25%);
+    text-shadow: 0 1px 0 hsl(0 0% 100% / .45);
+  }
+  .podium-rank-pill {
+    @apply absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1 font-command text-xs font-black text-white;
+    background: linear-gradient(180deg, hsl(210 80% 35%), hsl(210 90% 20%));
+    border: 2px solid hsl(190 100% 88% / .45);
+    box-shadow: 0 4px 12px hsl(210 90% 8% / .35);
+  }
+  .podium-name-1 { background: linear-gradient(180deg, hsl(52 100% 78%), hsl(48 100% 61%)); }
+  .podium-name-2 { background: linear-gradient(180deg, hsl(187 100% 84%), hsl(196 95% 72%)); }
+  .podium-name-3 { background: linear-gradient(180deg, hsl(24 100% 90%), hsl(20 80% 78%)); }
+
+  .alliance-podium {
+    @apply rounded-xl p-6 md:p-8;
+    background: linear-gradient(180deg, hsl(210 80% 52% / 0.25) 0%, hsl(240 22% 14% / 0.9) 100%);
+    border: 1px solid hsl(210 70% 55% / 0.35);
+    box-shadow: 0 4px 32px hsl(210 80% 40% / 0.2);
+    backdrop-filter: blur(12px);
+  }
+  .alliance-podium-card {
+    @apply relative flex flex-col items-center justify-center rounded-xl p-4 md:p-5;
+    border: 2px solid;
+    min-height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .alliance-podium-card:hover {
+    transform: translateY(-4px) scale(1.04);
+  }
+  .alliance-podium-gold { min-height: 120px; }
+  .alliance-podium-banner {
+    @apply flex items-center justify-center rounded-lg;
+    width: 48px;
+    height: 56px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+    filter: drop-shadow(0 3px 6px hsl(0 0% 0% / 0.4));
+  }
+  .alliance-podium-medal {
+    @apply absolute -bottom-2 text-2xl;
+    filter: drop-shadow(0 2px 4px hsl(0 0% 0% / 0.5));
+  }
+  .alliance-podium-rank {
+    @apply absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full font-command text-sm font-black;
+    background: hsl(240 25% 10%);
+    border: 2px solid;
+    border-color: inherit;
+    color: hsl(210 40% 96%);
+  }
+
+  .alliance-table-header {
+    @apply flex items-center gap-3 rounded-t-xl px-4 py-3 text-sm font-bold uppercase tracking-wider;
+    background: hsl(210 60% 48% / 0.35);
+    border: 1px solid hsl(210 60% 55% / 0.4);
+    border-bottom: 2px solid hsl(210 60% 55% / 0.3);
+    color: hsl(210 40% 92%);
+    backdrop-filter: blur(8px);
+  }
+  .alliance-col-rank {
+    @apply shrink-0 text-center;
+    width: 72px;
+  }
+  .alliance-col-name {
+    @apply flex items-center gap-3 flex-1 min-w-0;
+  }
+  .alliance-col-power {
+    @apply flex items-center gap-1.5 shrink-0;
+    width: 140px;
+  }
+  .alliance-col-actions {
+    @apply flex items-center gap-1.5 shrink-0;
+    width: 80px;
+    justify-content: flex-end;
+  }
+
+  .alliance-list {
+    @apply rounded-b-xl overflow-hidden;
+    border: 1px solid hsl(210 50% 50% / 0.25);
+    border-top: none;
+  }
+  .alliance-row {
+    @apply flex items-center gap-3 px-4 py-3 transition-all duration-200;
+    background: hsl(210 35% 20% / 0.55);
+    border-bottom: 1px solid hsl(210 50% 50% / 0.15);
+    backdrop-filter: blur(6px);
+  }
+  .alliance-row:last-child {
+    border-bottom: none;
+  }
+  .alliance-row:hover {
+    background: hsl(210 45% 28% / 0.65);
+    box-shadow: inset 0 0 0 1px hsl(210 60% 55% / 0.2);
+  }
+  .alliance-row:nth-child(even) {
+    background: hsl(210 30% 18% / 0.55);
+  }
+  .alliance-row:nth-child(even):hover {
+    background: hsl(210 40% 25% / 0.65);
+  }
+
+  .alliance-rank-badge {
+    @apply inline-flex items-center justify-center rounded-lg font-command text-sm font-black;
+    width: 36px;
+    height: 36px;
+    background: hsl(210 40% 25% / 0.7);
+    border: 1.5px solid hsl(210 50% 50% / 0.35);
+    color: hsl(210 40% 88%);
+    box-shadow: 0 2px 8px hsl(210 50% 30% / 0.25);
+  }
+
+  .alliance-row-banner {
+    @apply flex items-center justify-center rounded-md shrink-0;
+    width: 36px;
+    height: 42px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+    filter: drop-shadow(0 2px 4px hsl(0 0% 0% / 0.35));
+    transition: transform 0.2s ease;
+  }
+  .alliance-row:hover .alliance-row-banner {
+    transform: scale(1.08);
+  }
+
+  .alliance-action-btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm transition-all duration-150;
+    width: 32px;
+    height: 32px;
+    background: hsl(210 30% 22% / 0.6);
+    border: 1px solid hsl(210 40% 40% / 0.3);
+    cursor: pointer;
+    opacity: 0;
+  }
+  .alliance-row:hover .alliance-action-btn {
+    opacity: 1;
+  }
+  .alliance-action-btn:hover {
+    background: hsl(210 50% 35% / 0.7);
+    border-color: hsl(190 100% 70% / 0.4);
+    transform: scale(1.1);
+  }
+  .alliance-action-delete:hover {
+    background: hsl(5 60% 40% / 0.5);
+    border-color: hsl(5 86% 63% / 0.5);
+  }
+
+  .alliance-event-cell {
+    @apply flex items-center justify-between rounded-md px-3 py-2;
+    background: hsl(210 30% 18% / 0.6);
+    border: 1px solid hsl(210 40% 35% / 0.25);
+  }
+
   /* ─── Footer ─── */
   .wiki-footer {
     @apply py-8 text-center text-sm;
@@ -340,6 +928,52 @@
 
 @keyframes snowdrift { from { background-position: 0 0, 0 0; } to { background-position: 160px 380px, -220px 440px; } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes podiumBlaze {
+  0%, 100% { transform: translateY(0) scaleX(.92); opacity: .42; }
+  50% { transform: translateY(-18px) scaleX(1.08); opacity: .78; }
+}
+@keyframes podiumSnow {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 84px 220px, -132px 260px; }
+}
+@keyframes podiumAurora {
+  0%, 100% { transform: translateX(-2%) scaleY(.96); opacity: .78; }
+  50% { transform: translateX(3%) scaleY(1.05); opacity: 1; }
+}
+@keyframes podiumSpotlight {
+  0%, 100% { opacity: .34; transform: translateX(-2%) scaleX(.94); }
+  50% { opacity: .72; transform: translateX(2%) scaleX(1.08); }
+}
+@keyframes championSpin {
+  from { transform: rotate(0deg) scale(.96); }
+  to { transform: rotate(360deg) scale(.96); }
+}
+@keyframes bannerShine {
+  0%, 28% { transform: translateX(-36%); opacity: 0; }
+  42% { opacity: .8; }
+  58%, 100% { transform: translateX(44%); opacity: 0; }
+}
+@keyframes generatedBlaze {
+  0%, 100% { transform: translateY(18px) scale(.88); opacity: .16; }
+  50% { transform: translateY(-22px) scale(1.08); opacity: .58; }
+}
+@keyframes generatedBannerShine {
+  0%, 32% { transform: translateX(-30%); opacity: 0; }
+  46% { opacity: .9; }
+  64%, 100% { transform: translateX(30%); opacity: 0; }
+}
+@keyframes rankNamePulse {
+  0%, 100% { transform: translateY(0); filter: brightness(1); }
+  50% { transform: translateY(-2px); filter: brightness(1.18); }
+}
+@keyframes bannerFloat {
+  0%, 100% { transform: translateY(0) rotate(-.4deg) scale(1); filter: brightness(1); }
+  50% { transform: translateY(-14px) rotate(.6deg) scale(1.03); filter: brightness(1.2); }
+}
+@keyframes auraPulse {
+  0%, 100% { opacity: .46; transform: scale(.92); }
+  50% { opacity: .98; transform: scale(1.14); }
+}
 
 .animate-fade-up {
   animation: fadeUp 0.6s ease-out both;
@@ -347,4 +981,25 @@
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+@media (max-width: 640px) {
+  .game-podium { min-height: 390px; }
+  .podium-header { left: 1.25rem; top: 1.15rem; }
+  .podium-header p { font-size: 1.55rem; }
+  .podium-header span { font-size: .58rem; padding: .18rem .55rem; }
+  .podium-stage { min-height: 390px; padding-inline: .35rem; padding-top: 4.5rem; }
+  .podium-center { min-height: 330px; }
+  .podium-left, .podium-right { min-height: 275px; }
+  .banner-handshake { right: -.45rem; }
+  .podium-name-card { border-radius: 18px 18px 0 0; }
+  .podium-name-card p { font-size: .82rem; }
+  .game-medal span { font-size: 1.6rem; }
+  .podium-rank-pill { padding: .12rem .5rem; font-size: .55rem; }
+  .generated-rank-name { gap: .2rem; padding: .25rem .25rem; border-radius: .5rem; }
+  .generated-rank-name span { display: none; }
+  .generated-rank-name b { font-size: .58rem; }
+  .float-banner-left { left: 15%; top: 24%; max-width: 110px; }
+  .float-banner-center { left: 50%; top: 20%; max-width: 130px; }
+  .float-banner-right { right: 15%; top: 24%; max-width: 110px; }
 }
