@@ -36,7 +36,7 @@ function TextEditor({ name, fields, allowed, title, order = "updated_at" }: { na
 function safeJson(v:string){ try { return JSON.parse(v); } catch { return v; } }
 
 export const EventsManager = () => <TextEditor name="events" title="Events Manager" allowed={["owner","event_manager"]} order="created_at" fields={["name","utc_time","local_note","status","description","instructions"]}/>;
-export const AllianceManager = () => <TextEditor name="alliances" title="Alliance Manager" allowed={["owner","r5_moderator","r4_moderator"]} order="name" fields={["name","tag","power","main_language","bear_trap_time","foundry_time","crazy_joe_time","recruiting_status","requirements","contact","description"]}/>;
+export const AllianceManager = () => <TextEditor name="alliances" title="Alliance Manager" allowed={["owner","r5_moderator","r4_moderator"]} order="name" fields={["name","tag","power","main_language","bear_trap_time","foundry_time","crazy_joe_time","canyon_clash_time","alliance_championship_time","recruiting_status","requirements","contact","description"]}/>;
 export const RulesManager = () => <TextEditor name="rules_sections" title="Rules Manager" allowed={["owner","governor"]} order="created_at" fields={["title","category","content"]}/>;
 export const GovernorManager = () => <TextEditor name="governor_board" title="Governor Board Manager" allowed={["owner","governor"]} fields={["current_governor","minister_rotation","buff_schedule","castle_rotation"]}/>;
 export const AnnouncementsManager = () => <TextEditor name="announcements" title="Announcements" allowed={["owner","governor","event_manager","r5_moderator","r4_moderator"]} order="created_at" fields={["title","message","category","visibility","status"]}/>;

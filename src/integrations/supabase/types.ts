@@ -51,7 +51,9 @@ export type Database = {
       }
       alliances: {
         Row: {
+          alliance_championship_time: string | null
           bear_trap_time: string | null
+          canyon_clash_time: string | null
           contact: string | null
           crazy_joe_time: string | null
           created_at: string
@@ -68,7 +70,9 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
+          alliance_championship_time?: string | null
           bear_trap_time?: string | null
+          canyon_clash_time?: string | null
           contact?: string | null
           crazy_joe_time?: string | null
           created_at?: string
@@ -85,7 +89,9 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
+          alliance_championship_time?: string | null
           bear_trap_time?: string | null
+          canyon_clash_time?: string | null
           contact?: string | null
           crazy_joe_time?: string | null
           created_at?: string
