@@ -292,6 +292,13 @@ const STATE_ALLIANCES: R[] = [
   { _static: true, tag: "cGm", name: "ChaoticAngels", power: "101,175,164", recruiting_status: "Yes" },
 ];
 
+const hasPowerValue = (power: unknown) => /\d/.test(String(power || ""));
+const shouldUseStaticRankData = (dbAlliance: R) => {
+  const name = String(dbAlliance.name || "").trim().toLowerCase();
+  const tag = String(dbAlliance.tag || "").trim().toLowerCase();
+  return !hasPowerValue(dbAlliance.power) || name === tag || name.includes("placeholder");
+};
+
 function PodiumEmblem({ rank }: { rank: number }) {
   if (rank === 1) {
     return (
@@ -461,9 +468,21 @@ export function AlliancesPage() {
   /* ─── Merge: DB alliances override static ones by tag match ─── */
   const merged = useMemo(() => {
     const db = dbAlliances || [];
+    const staticByTag = new Map(STATE_ALLIANCES.map((a) => [a.tag.toLowerCase(), a]));
     const dbTags = new Set(db.map(a => (a.tag || "").toLowerCase()));
+    const mergedDb = db.map((a) => {
+      const staticAlliance = staticByTag.get(String(a.tag || "").toLowerCase());
+      if (!staticAlliance || !shouldUseStaticRankData(a)) return a;
+      return {
+        ...staticAlliance,
+        ...a,
+        name: staticAlliance.name,
+        power: staticAlliance.power,
+        recruiting_status: a.recruiting_status || staticAlliance.recruiting_status,
+      };
+    });
     const fromStatic = STATE_ALLIANCES.filter(s => !dbTags.has(s.tag.toLowerCase())).map((s, i) => ({ ...s, id: `static-${i}` }));
-    return [...db, ...fromStatic];
+    return [...mergedDb, ...fromStatic];
   }, [dbAlliances]);
 
   /* ─── Sort by power descending, filter ─── */
