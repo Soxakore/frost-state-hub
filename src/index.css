@@ -325,7 +325,7 @@
       inset 0 0 42px hsl(190 100% 78% / .18),
       0 26px 90px hsl(205 95% 18% / .55);
   }
-  .generated-alliance-banner img {
+  .generated-alliance-banner > img {
     @apply block h-auto w-full;
     filter: saturate(1.05) contrast(1.02);
   }
@@ -391,6 +391,7 @@
     filter: drop-shadow(0 10px 16px hsl(210 100% 5% / .55));
     animation: bannerFloat 3.6s ease-in-out infinite;
     height: auto;
+    width: auto;
     max-width: 200px;
   }
   .generated-floating-banners::before,
@@ -424,8 +425,8 @@
     animation-delay: -.4s;
   }
   .float-banner-center {
-    left: 44%;
-    transform: translateX(-50%);
+    left: 50%;
+    translate: -50% 0;
     top: 16%;
     max-width: 210px;
     animation-delay: -1.1s;
@@ -443,10 +444,13 @@
     min-width: 17%;
     max-width: 28%;
     min-height: 7.2%;
-    border-color: hsl(0 0% 100% / .24);
-    background: hsl(212 65% 8% / .18);
-    box-shadow: 0 0 22px hsl(190 100% 72% / .18), inset 0 1px 0 hsl(0 0% 100% / .24);
-    backdrop-filter: blur(1.5px);
+    border-color: hsl(0 0% 100% / .46);
+    background: linear-gradient(180deg, hsl(210 70% 14% / .84), hsl(213 82% 7% / .76));
+    box-shadow:
+      0 0 24px hsl(190 100% 72% / .26),
+      inset 0 1px 0 hsl(0 0% 100% / .34),
+      inset 0 -12px 24px hsl(210 90% 5% / .34);
+    backdrop-filter: blur(5px) saturate(1.22);
     animation: rankNamePulse 3.2s ease-in-out infinite;
   }
   .generated-rank-name span {
@@ -458,7 +462,11 @@
   .generated-rank-name b {
     @apply truncate font-command text-sm font-black md:text-xl;
     color: hsl(0 0% 100%);
-    text-shadow: 0 3px 0 hsl(210 90% 5% / .54), 0 0 12px hsl(190 100% 78% / .52);
+    -webkit-text-stroke: .25px hsl(210 100% 4% / .86);
+    text-shadow:
+      0 2px 0 hsl(210 95% 5% / .82),
+      0 0 10px hsl(190 100% 86% / .70),
+      0 0 18px hsl(210 100% 5% / .62);
   }
   .rank-overlay-left {
     left: 11.2%;
@@ -470,16 +478,16 @@
     top: 72.2%;
     width: 27.5%;
     min-height: 8.5%;
-    background: hsl(40 100% 52% / .18);
-    box-shadow: 0 0 32px hsl(41 100% 58% / .38), inset 0 1px 0 hsl(0 0% 100% / .26);
+    background: linear-gradient(180deg, hsl(43 100% 48% / .78), hsl(32 95% 22% / .76));
+    box-shadow: 0 0 34px hsl(41 100% 58% / .50), inset 0 1px 0 hsl(0 0% 100% / .36), inset 0 -12px 22px hsl(25 95% 12% / .32);
     animation-delay: -.9s;
   }
   .rank-overlay-right {
     left: 69%;
     top: 72.2%;
     width: 22.4%;
-    background: hsl(24 80% 52% / .16);
-    box-shadow: 0 0 24px hsl(24 100% 64% / .25), inset 0 1px 0 hsl(0 0% 100% / .24);
+    background: linear-gradient(180deg, hsl(24 82% 48% / .70), hsl(15 78% 20% / .72));
+    box-shadow: 0 0 26px hsl(24 100% 64% / .34), inset 0 1px 0 hsl(0 0% 100% / .34), inset 0 -12px 22px hsl(15 90% 10% / .28);
     animation-delay: -1.6s;
   }
 
@@ -983,6 +991,46 @@
   *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
 
+@media (max-width: 900px) {
+  .float-banner-left {
+    left: 10.5%;
+    top: 16.5%;
+    width: 21%;
+    max-width: none;
+  }
+  .float-banner-center {
+    left: 50%;
+    top: 17%;
+    width: 24%;
+    max-width: none;
+  }
+  .float-banner-right {
+    right: 7.5%;
+    top: 15.5%;
+    width: 21%;
+    max-width: none;
+  }
+  .generated-floating-banners::before {
+    left: 9%;
+    width: 26%;
+  }
+  .generated-floating-banners::after {
+    right: 9%;
+    width: 26%;
+  }
+  .generated-rank-name {
+    gap: .35rem;
+    padding-inline: .38rem;
+  }
+  .generated-rank-name span {
+    padding: .2rem .45rem;
+    font-size: .68rem;
+  }
+  .generated-rank-name b {
+    font-size: .68rem;
+  }
+}
+
 @media (max-width: 640px) {
   .game-podium { min-height: 390px; }
   .podium-header { left: 1.25rem; top: 1.15rem; }
@@ -998,8 +1046,8 @@
   .podium-rank-pill { padding: .12rem .5rem; font-size: .55rem; }
   .generated-rank-name { gap: .2rem; padding: .25rem .25rem; border-radius: .5rem; }
   .generated-rank-name span { display: none; }
-  .generated-rank-name b { font-size: .58rem; }
-  .float-banner-left { left: 15%; top: 24%; max-width: 110px; }
-  .float-banner-center { left: 50%; top: 20%; max-width: 130px; }
-  .float-banner-right { right: 15%; top: 24%; max-width: 110px; }
+  .generated-rank-name b { font-size: .5rem; }
+  .float-banner-left { left: 7%; top: 21.5%; width: 26%; max-width: none; }
+  .float-banner-center { left: 50%; top: 20%; width: 29%; max-width: none; }
+  .float-banner-right { right: 5.5%; top: 20.5%; width: 26%; max-width: none; }
 }
